@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Kakak!</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Nunito', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1, h2, h3, .btn-custom, .btn-prank {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .birthday-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .pop-in-anim {
+            animation: popIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes popIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .photo-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 380px; /* Lebar maksimal foto */
+        }
+        
+        /* Memaksa foto menjadi 1:1 dan tidak gepeng */
+        .photo-frame {
+            border: 8px solid #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1; /* Rasio kotak sempurna */
+            object-fit: cover;   /* Memotong foto agar pas tanpa distorsi */
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.02) rotate(-2deg);
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatUp linear infinite;
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+
+        .btn-custom {
+            background: linear-gradient(45deg, #ff758c 0%, #ff7eb3 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.6);
+            color: white;
+        }
+
+        .btn-prank {
+            background: #ffc107;
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        .btn-prank:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: #ffb300;
+        }
+
+        .decor-icon {
+            font-size: 2.5rem;
+            margin: 0 10px;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .slide-transition {
+            transition: opacity 0.5s ease-in-out;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Melayang -->
+    <div id="floating-container"></div>
+
+    <!-- ================= SLIDE 1: PRANK ================= -->
+    <div id="slide1" class="container min-vh-100 d-flex align-items-center justify-content-center py-5 slide-transition">
+        <div class="row w-100 justify-content-center">
+            <div class="col-12 col-xl-10">
+                
+                <div class="birthday-card pop-in-anim p-4 p-md-5">
+                    <div class="row align-items-center">
+                        
+                        <!-- Kolom Foto Aib (Grid Kiri) -->
+                        <div class="col-md-6 text-center mb-4 mb-md-0">
+                            <div class="photo-container">
+                                <!-- FOTO AIB KAKAK (Placeholder sudah diset 600x600 kotak) -->
+                                <img src="FotoImut.png" 
+                                     alt="Cipaling Imut wokwokw" 
+                                     class="photo-frame img-fluid">
+                            </div>
+                        </div>
+
+                        <!-- Kolom Teks Prank (Grid Kanan) -->
+                        <div class="col-md-6 text-center text-md-start">
+                            <h2 class="display-5 fw-bold text-dark mb-3">Ea tengok ni😹</h2>
+                            <h3 class="mb-3 text-danger">Cipaling Imut😂</h3>
+                            <p class="lead text-secondary mb-4" style="line-height: 1.8;">
+                                Tengok ni ha, mukanya kek bocil njir wowkowkowkowkowkok, kek anak tk, andai punya pal foto yang akak cuman pakai pempes lagi makan😂😹
+                            </p>
+                            
+                            <button id="nextBtn" class="btn btn-prank w-100 w-md-auto fw-bold">
+                                Pencet Buat Lanjut, Anjass➡️
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= SLIDE 2: ASLI (Awalnya Disembunyikan) ================= -->
+    <div id="slide2" class="container min-vh-100 align-items-center justify-content-center py-5 slide-transition" style="display: none; opacity: 0;">
+        <div class="row w-100 justify-content-center">
+            <div class="col-12 col-xl-10">
+                
+                <div id="realCard" class="birthday-card p-4 p-md-5">
+                    <div class="row align-items-center">
+                        
+                        <!-- Kolom Foto Asli (Grid Kiri) -->
+                        <div class="col-md-6 text-center mb-4 mb-md-0">
+                            <div class="photo-container">
+                                <!-- FOTO BAGUS KAKAK (Placeholder diset 600x600 kotak) -->
+                                <img src="WhatsApp Image 2026-10-12 at 18.43.34.jpeg" 
+                                     alt="Foto Cakep Kakak" 
+                                     class="photo-frame img-fluid">
+                            </div>
+                        </div>
+
+                        <!-- Kolom Teks Ucapan (Grid Kanan) -->
+                        <div class="col-md-6 text-center text-md-start">
+                            <div class="mb-3 d-flex justify-content-center justify-content-md-start">
+                                <span class="decor-icon">🎉</span>
+                                <span class="decor-icon">🎂</span>
+                                <span class="decor-icon">🎁</span>
+                            </div>
+                            
+                            <h1 class="display-5 fw-bold text-dark mb-3">Selamat Ulang Tahun,<br><span style="color: #ff477e;">Best!</span></h1>
+                            
+                            <p class="lead text-secondary mb-3" style="line-height: 1.6;">
+                                Makin tua njir, wokwokwowkowk. Semoga makin sukses, karirnya lancar, rezekinya lancar, sehat terus, dietnya berjalan lancar, dan makin sering traktir gwehj, hehehe👉👈🤭 
+                            </p>
+                            
+                            <p class="text-secondary mb-4">
+                                Kakak gwehj keren, walau nyebelin dikit tapi oke, dah bisa jadi panutan, ya gitulah kira kira. Semoga berkurang sifat narsis nya
+                            </p>
+                            
+                            <button id="surpriseBtn" class="btn btn-custom w-100 w-md-auto fw-bold">
+                                Pencet Buat Kejutan✨
+                            </button>
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Generate Floating Background Emojis
+            const floatingContainer = document.getElementById('floating-container');
+            const emojis = ['🎈', '✨', '🎉', '🎁', '🎈', '💖'];
+            const numElements = 15;
+
+            for (let i = 0; i < numElements; i++) {
+                let el = document.createElement('div');
+                el.className = 'floating-element';
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                let leftPos = Math.random() * 100;
+                let animDuration = 10 + Math.random() * 15;
+                let animDelay = Math.random() * 5;
+                let fontSize = 1.5 + Math.random() * 2;
+
+                el.style.left = `${leftPos}vw`;
+                el.style.animationDuration = `${animDuration}s`;
+                el.style.animationDelay = `${animDelay}s`;
+                el.style.fontSize = `${fontSize}rem`;
+
+                floatingContainer.appendChild(el);
+            }
+
+            // 2. Logika Transisi Fade Slide 1 ke Slide 2
+            const slide1 = document.getElementById('slide1');
+            const slide2 = document.getElementById('slide2');
+            const nextBtn = document.getElementById('nextBtn');
+            const realCard = document.getElementById('realCard');
+
+            nextBtn.addEventListener('click', () => {
+                // Fade out Slide 1
+                slide1.style.opacity = '0';
+                
+                setTimeout(() => {
+                    // Sembunyikan Slide 1
+                    slide1.classList.remove('d-flex');
+                    slide1.style.display = 'none';
+                    
+                    // Munculkan Slide 2 (Masih transparan)
+                    slide2.classList.add('d-flex');
+                    slide2.style.display = 'flex';
+                    
+                    // Trigger reflow untuk animasi CSS
+                    void slide2.offsetWidth; 
+                    
+                    // Fade in Slide 2 & jalankan animasi kartu
+                    slide2.style.opacity = '1';
+                    realCard.classList.add('pop-in-anim');
+                }, 500); // 500ms adalah durasi CSS transition opacity
+            });
+
+            // 3. Logika Confetti (Kejutan Slide 2)
+            const surpriseBtn = document.getElementById('surpriseBtn');
+            
+            surpriseBtn.addEventListener('click', () => {
+                var duration = 3 * 1000;
+                var animationEnd = Date.now() + duration;
+                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+                function randomInRange(min, max) {
+                    return Math.random() * (max - min) + min;
+                }
+
+                var interval = setInterval(function() {
+                    var timeLeft = animationEnd - Date.now();
+                    if (timeLeft <= 0) return clearInterval(interval);
+
+                    var particleCount = 50 * (timeLeft / duration);
+                    // Menyebarkan confetti dari dua sisi (kiri dan kanan bawah)
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                }, 250);
+
+                // Ubah teks tombol sementara
+                const originalText = surpriseBtn.innerHTML;
+                surpriseBtn.innerHTML = "✨ Horeeee! ✨";
+                setTimeout(() => { surpriseBtn.innerHTML = originalText; }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>
